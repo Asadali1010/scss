@@ -1,4 +1,6 @@
 import { navigation, type NavItem } from '../data/navigation'
+import { getDocContent } from '../data/content'
+import type { DocContent } from '../types/docContent'
 
 export function sectionPath(slug: string): string {
   return `/docs/${slug}`
@@ -82,6 +84,10 @@ export interface ResolvedDocRoute {
   page?: NavItem
 }
 
+export interface ResolvedDocRouteWithContent extends ResolvedDocRoute {
+  content?: DocContent
+}
+
 export function resolveDocRoute(pathname: string): ResolvedDocRoute | null {
   const segments = pathname.replace(/^\/docs\/?/, '').split('/').filter(Boolean)
   const sectionSlug = segments[0]
@@ -99,4 +105,16 @@ export function resolveDocRoute(pathname: string): ResolvedDocRoute | null {
   }
 
   return { section }
+}
+
+export function resolveDocRouteWithContent(
+  pathname: string,
+): ResolvedDocRouteWithContent | null {
+  const resolved = resolveDocRoute(pathname)
+  if (!resolved?.page) return resolved
+
+  return {
+    ...resolved,
+    content: getDocContent(resolved.section.slug, resolved.page.slug),
+  }
 }
