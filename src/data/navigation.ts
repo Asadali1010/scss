@@ -1,6 +1,7 @@
 export interface NavItem {
   title: string
   slug: string
+  path?: string
   children?: NavItem[]
 }
 
@@ -214,6 +215,11 @@ export const navigation: NavItem[] = [
       { title: 'Architecture Questions', slug: 'architecture-questions' },
       { title: 'Troubleshooting Scenarios', slug: 'troubleshooting' },
     ],
+  },
+  {
+    title: 'Quiz',
+    slug: 'quiz',
+    path: '/quiz',
   },
   {
     title: 'Cheatsheets',
