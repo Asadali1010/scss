@@ -1,10 +1,20 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import DocsLayout from './components/layout/DocsLayout'
 import { ThemeProvider } from './context/ThemeContext'
 import DocsPage from './pages/DocsPage'
 import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
-import QuizPage from './pages/QuizPage'
+
+const QuizPage = lazy(() => import('./pages/QuizPage'))
+
+function QuizPageFallback() {
+  return (
+    <div className="py-12 text-center" style={{ color: 'var(--color-text-muted)' }}>
+      Loading quiz…
+    </div>
+  )
+}
 
 export default function App() {
   return (
@@ -12,7 +22,16 @@ export default function App() {
       <ThemeProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/quiz" element={<QuizPage />} />
+          <Route
+            path="/quiz"
+            element={
+              <DocsLayout>
+                <Suspense fallback={<QuizPageFallback />}>
+                  <QuizPage />
+                </Suspense>
+              </DocsLayout>
+            }
+          />
           <Route
             path="/docs/*"
             element={
