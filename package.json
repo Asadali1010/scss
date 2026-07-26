@@ -10,7 +10,8 @@
     "scss:build": "sass examples/shared/scss/main.scss examples/shared/scss/main.css --style=expanded",
     "scss:build:examples": "sass examples/dashboard-ui/scss/main.scss examples/dashboard-ui/css/main.css --style=compressed && sass examples/marketing-site/scss/main.scss examples/marketing-site/css/main.css --style=compressed && sass examples/design-system-migration/scss/main.scss examples/design-system-migration/css/main.css --style=compressed",
     "scss:build:component-library": "sass examples/component-library/scss/index.scss examples/component-library/dist/component-library.min.css --style=compressed",
-    "scss:build:all": "npm run scss:build && npm run scss:build:examples && npm run scss:build:component-library"
+    "scss:build:all": "npm run scss:build && npm run scss:build:examples && npm run scss:build:component-library",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.1",
@@ -20,7 +21,8 @@
     "sass": "^1.83.0",
     "tailwindcss": "^4.3.1",
     "typescript": "~6.0.2",
-    "vite": "^8.1.0"
+    "vite": "^8.1.0",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "@codemirror/commands": "^6.8.0",

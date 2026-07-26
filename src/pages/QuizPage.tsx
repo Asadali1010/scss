@@ -1,11 +1,16 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import QuizQuestion, { type QuizResult } from '../components/quiz/QuizQuestion'
 import { quizQuestions } from '../data/quizQuestions'
+import { formatDocumentTitle } from '../utils/routes'
 import { validateAnswer } from '../utils/quizValidation'
 
 const TOTAL = quizQuestions.length
 
 export default function QuizPage() {
+  useEffect(() => {
+    document.title = formatDocumentTitle('Quiz')
+  }, [])
+
   const [currentIndex, setCurrentIndex] = useState(0)
   const [codes, setCodes] = useState<string[]>(() =>
     quizQuestions.map((q) => q.starterCode),

@@ -1,12 +1,17 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
 import { navigation } from '../data/navigation'
-import { quizPath, sectionPath } from '../utils/routes'
+import { formatDocumentTitle, quizPath, sectionPath } from '../utils/routes'
 
 export default function HomePage() {
   const { theme, toggleTheme } = useTheme()
   const isDark = theme === 'dark'
   const firstSection = navigation[0]
+
+  useEffect(() => {
+    document.title = formatDocumentTitle()
+  }, [])
 
   return (
     <div
