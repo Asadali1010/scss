@@ -1,6 +1,7 @@
 import { Navigate, useLocation } from 'react-router-dom'
+import DocContentView from '../components/docs/DocContentView'
 import { navigation } from '../data/navigation'
-import { resolveDocRoute, sectionPath } from '../utils/routes'
+import { resolveDocRouteWithContent, sectionPath } from '../utils/routes'
 import NotFoundPage from './NotFoundPage'
 
 const sectionPlaceholders: Record<string, string> = {
@@ -30,6 +31,26 @@ const sectionPlaceholders: Record<string, string> = {
     'Production SCSS needs clear structure, naming, and performance habits. These guides cover how experienced teams keep stylesheets maintainable.',
   migration:
     'Move legacy CSS and @import-based projects onto SCSS and the module system without breaking builds or bloating output.',
+  'architecture-patterns':
+    'Organize stylesheets with ITCSS, BEM, the 7-1 pattern, and component-library architectures that scale across teams.',
+  'responsive-design':
+    'Build mobile-first layouts with breakpoint mixins, fluid type, and container queries generated from shared Sass tools.',
+  theming:
+    'Combine SCSS token maps with CSS custom properties for runtime theme switching, dark mode, and multi-brand products.',
+  'layout-systems':
+    'Encode grid, flex, spacing, and stack/cluster layout patterns as reusable mixins and utility generators.',
+  'design-tokens':
+    'Structure primitive and semantic tokens in SCSS maps and modules for consistent design-system delivery.',
+  'common-mistakes':
+    'Recognize over-nesting, global pollution, risky @extend chains, and import-order bugs before they reach production.',
+  'real-world-projects':
+    'Apply SCSS architecture to dashboards, marketing sites, component libraries, and design-system migrations.',
+  'interview-prep':
+    'Review core concepts, coding challenges, architecture questions, and troubleshooting scenarios for SCSS interviews.',
+  cheatsheets:
+    'Quick-reference syntax, functions, mixin recipes, and module-system directives for day-to-day development.',
+  resources:
+    'Official documentation, compilers, community links, and curated books and courses for continued learning.',
 }
 
 function getSectionPlaceholder(slug: string, title: string): string {
@@ -50,16 +71,13 @@ export default function DocsPage() {
     return <Navigate to={sectionPath(navigation[0].slug)} replace />
   }
 
-  const resolved = resolveDocRoute(pathname)
+  const resolved = resolveDocRouteWithContent(pathname)
   if (!resolved) {
     return <NotFoundPage embedded />
   }
 
-  const { section, page } = resolved
+  const { section, page, content } = resolved
   const title = page?.title ?? section.title
-  const description = page
-    ? getPagePlaceholder(section.title, page.title)
-    : getSectionPlaceholder(section.slug, section.title)
 
   return (
     <article>
@@ -74,23 +92,31 @@ export default function DocsPage() {
         )}
       </header>
 
-      <div
-        className="max-w-prose space-y-4 text-base leading-relaxed"
-        style={{ color: 'var(--color-text-muted)' }}
-      >
-        <p>{description}</p>
-        <p
-          className="rounded-lg border px-4 py-3 text-sm"
-          style={{
-            borderColor: 'var(--color-border)',
-            backgroundColor: 'var(--color-surface-muted)',
-            color: 'var(--color-text)',
-          }}
+      {content ? (
+        <DocContentView content={content} />
+      ) : (
+        <div
+          className="max-w-prose space-y-4 text-base leading-relaxed"
+          style={{ color: 'var(--color-text-muted)' }}
         >
-          Content for this page is a placeholder. Select another topic from the sidebar or search
-          to explore the full table of contents.
-        </p>
-      </div>
+          <p>
+            {page
+              ? getPagePlaceholder(section.title, page.title)
+              : getSectionPlaceholder(section.slug, section.title)}
+          </p>
+          <p
+            className="rounded-lg border px-4 py-3 text-sm"
+            style={{
+              borderColor: 'var(--color-border)',
+              backgroundColor: 'var(--color-surface-muted)',
+              color: 'var(--color-text)',
+            }}
+          >
+            Content for this page is a placeholder. Select another topic from the sidebar or search
+            to explore the full table of contents.
+          </p>
+        </div>
+      )}
     </article>
   )
 }

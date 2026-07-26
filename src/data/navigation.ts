@@ -135,4 +135,104 @@ export const navigation: NavItem[] = [
       { title: 'Tooling Updates', slug: 'tooling-updates' },
     ],
   },
+  {
+    title: 'Architecture Patterns',
+    slug: 'architecture-patterns',
+    children: [
+      { title: 'ITCSS', slug: 'itcss' },
+      { title: 'BEM with SCSS', slug: 'bem-scss' },
+      { title: '7-1 Pattern', slug: 'seven-one' },
+      { title: 'Component Libraries', slug: 'component-libraries' },
+    ],
+  },
+  {
+    title: 'Responsive Design',
+    slug: 'responsive-design',
+    children: [
+      { title: 'Breakpoint Mixins', slug: 'breakpoint-mixins' },
+      { title: 'Mobile-First Strategy', slug: 'mobile-first' },
+      { title: 'Fluid Typography', slug: 'fluid-typography' },
+      { title: 'Container Queries', slug: 'container-queries' },
+    ],
+  },
+  {
+    title: 'Theming',
+    slug: 'theming',
+    children: [
+      { title: 'CSS Custom Properties', slug: 'css-custom-properties' },
+      { title: 'Dark Mode', slug: 'dark-mode' },
+      { title: 'Theme Maps', slug: 'theme-maps' },
+      { title: 'Multi-Brand Themes', slug: 'multi-brand' },
+    ],
+  },
+  {
+    title: 'Layout Systems',
+    slug: 'layout-systems',
+    children: [
+      { title: 'Grid Mixins', slug: 'grid-mixins' },
+      { title: 'Flexbox Utilities', slug: 'flexbox-utilities' },
+      { title: 'Spacing Scale', slug: 'spacing-scale' },
+      { title: 'Stack & Cluster Patterns', slug: 'stack-cluster' },
+    ],
+  },
+  {
+    title: 'Design Tokens',
+    slug: 'design-tokens',
+    children: [
+      { title: 'Token Architecture', slug: 'token-architecture' },
+      { title: 'Color Tokens', slug: 'color-tokens' },
+      { title: 'Spacing Tokens', slug: 'spacing-tokens' },
+      { title: 'Typography Tokens', slug: 'typography-tokens' },
+    ],
+  },
+  {
+    title: 'Common Mistakes',
+    slug: 'common-mistakes',
+    children: [
+      { title: 'Over-Nesting', slug: 'over-nesting' },
+      { title: 'Global Pollution', slug: 'global-pollution' },
+      { title: 'Deep @extend Chains', slug: 'deep-extend' },
+      { title: 'Import Order Issues', slug: 'import-order' },
+    ],
+  },
+  {
+    title: 'Real-World Projects',
+    slug: 'real-world-projects',
+    children: [
+      { title: 'Dashboard UI', slug: 'dashboard-ui' },
+      { title: 'Marketing Site', slug: 'marketing-site' },
+      { title: 'Component Library', slug: 'component-library' },
+      { title: 'Design System Migration', slug: 'design-system-migration' },
+    ],
+  },
+  {
+    title: 'Interview Preparation',
+    slug: 'interview-prep',
+    children: [
+      { title: 'Core Concepts', slug: 'core-concepts' },
+      { title: 'Coding Challenges', slug: 'coding-challenges' },
+      { title: 'Architecture Questions', slug: 'architecture-questions' },
+      { title: 'Troubleshooting Scenarios', slug: 'troubleshooting' },
+    ],
+  },
+  {
+    title: 'Cheatsheets',
+    slug: 'cheatsheets',
+    children: [
+      { title: 'Syntax Reference', slug: 'syntax-reference' },
+      { title: 'Functions Quick Reference', slug: 'functions-reference' },
+      { title: 'Mixins Recipes', slug: 'mixins-recipes' },
+      { title: 'Module System Cheat Sheet', slug: 'module-cheatsheet' },
+    ],
+  },
+  {
+    title: 'Resources',
+    slug: 'resources',
+    children: [
+      { title: 'Official Documentation', slug: 'official-documentation' },
+      { title: 'Tools & Compilers', slug: 'tools-compilers' },
+      { title: 'Community & Learning', slug: 'community-learning' },
+      { title: 'Books & Courses', slug: 'books-courses' },
+    ],
+  },
 ]
