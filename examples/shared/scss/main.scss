@@ -1,0 +1,76 @@
+// Shared SCSS foundation entry — compiles to examples/shared/scss/main.css
+// Uses @use/@forward module system only (no legacy @import).
+
+@use 'abstracts/tokens' as tokens;
+@use 'themes/light' as light;
+@use 'themes/dark' as dark;
+@use 'themes/multi-brand' as brands;
+@use 'utilities/responsive' as responsive;
+@use 'utilities/spacing' as spacing;
+
+// ---------------------------------------------------------------------------
+// Design tokens → CSS custom properties
+// ---------------------------------------------------------------------------
+
+:root {
+  @include light.emit-theme-vars();
+
+  @each $step, $value in tokens.$spacing {
+    --space-#{$step}: #{$value};
+  }
+
+  @each $step, $value in tokens.$font-sizes {
+    --font-size-#{$step}: #{$value};
+  }
+
+  @each $key, $value in tokens.$line-heights {
+    --line-height-#{$key}: #{$value};
+  }
+}
+
+.dark {
+  @include dark.emit-theme-vars();
+}
+
+@include brands.emit-brand-themes();
+
+// Compile-time brand map validation
+$_: brands.validate-brand(brands.$brand-a);
+$_: brands.validate-brand(brands.$brand-b);
+
+// ---------------------------------------------------------------------------
+// Utility classes generated from token maps
+// ---------------------------------------------------------------------------
+
+@include responsive.generate-responsive-utilities();
+@include responsive.generate-visibility-utilities();
+@include spacing.generate-spacing-utilities();
+
+// ---------------------------------------------------------------------------
+// Foundation base styles (demonstrates token consumption)
+// ---------------------------------------------------------------------------
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--color-font-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-surface);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

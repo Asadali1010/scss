@@ -1,0 +1,33 @@
+/// Component Library — public entry point
+///
+/// ## Public API (`@use '@scss-examples/component-library' as lib`)
+///
+/// Forwarded modules for consumer SCSS (configure with `@use ... with (...)`):
+/// - `config` — library settings plus re-exported shared tokens, functions, breakpoints, grid
+/// - `layout/stack-cluster` — `stack` and `cluster` mixins and `.l-stack` / `.l-cluster` utilities
+///
+/// ## Compiled CSS
+///
+/// Compile this file directly to emit all component and layout class names:
+/// `sass examples/component-library/scss/index.scss`
+///
+/// Components expose CSS custom properties (e.g. `--btn-bg`, `--card-padding`) so consumers
+/// can theme without recompiling Sass sources.
+
+// ---------------------------------------------------------------------------
+// Public API — forwarded for consumer `@use` with configuration
+// ---------------------------------------------------------------------------
+
+@forward 'config';
+@forward 'layout/stack-cluster' show stack, cluster;
+
+// ---------------------------------------------------------------------------
+// Compiled output — @use partials to emit BEM component and layout classes
+// ---------------------------------------------------------------------------
+
+@use 'layout/stack-cluster';
+@use 'components/button';
+@use 'components/card';
+@use 'components/form';
+@use 'components/navigation';
+@use 'components/modal';

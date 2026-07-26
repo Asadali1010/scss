@@ -90,6 +90,7 @@ import deepExtend from './common-mistakes/deep-extend'
 import importOrder from './common-mistakes/import-order'
 
 import marketingSite from './real-world-projects/marketing-site'
+import dashboardUi from './real-world-projects/dashboard-ui'
 import componentLibrary from './real-world-projects/component-library'
 import designSystemMigration from './real-world-projects/design-system-migration'
 
@@ -451,46 +452,7 @@ $colors: (
   [key('common-mistakes', 'deep-extend')]: deepExtend,
   [key('common-mistakes', 'import-order')]: importOrder,
 
-  [key('real-world-projects', 'dashboard-ui')]: {
-    explanation: [
-      'Dashboard UIs combine dense data tables, filters, charts, and responsive sidebars—SCSS modules help isolate each surface while sharing tokens.',
-      'Structure dashboard SCSS by layout shell, data components, and chart wrappers rather than one file per page.',
-    ],
-    examples: [
-      {
-        title: 'Dashboard shell partial',
-        code: `@use '../tokens/spacing' as space;
-@use '../tools/breakpoints' as bp;
-
-.app-shell {
-  display: grid;
-  gap: space.$md;
-
-  @include bp.respond-above(lg) {
-    grid-template-columns: 240px 1fr;
-  }
-}`,
-      },
-    ],
-    demonstrations: [
-      'A filter bar and KPI card row both consume the same spacing tokens, so tightening vertical rhythm happens in one map edit.',
-    ],
-    bestPractices: [
-      'Keep chart library overrides in a dedicated vendors partial to avoid polluting component styles.',
-      'Use CSS grid for the shell and flex for toolbar groups inside panels.',
-    ],
-    commonMistakes: [
-      'Inlining third-party chart CSS overrides next to every chart instance instead of centralizing vendor patches.',
-      'Skipping empty states and loading skeleton styles in the initial SCSS pass.',
-    ],
-    references: [
-      { title: 'Sass — @use', url: 'https://sass-lang.com/documentation/at-rules/use/' },
-    ],
-    practicalUseCases: [
-      'Analytics products with role-based sidebars and collapsible navigation.',
-      'Internal admin tools that share a shell but swap module partials per feature team.',
-    ],
-  },
+  [key('real-world-projects', 'dashboard-ui')]: dashboardUi,
 
   [key('real-world-projects', 'marketing-site')]: marketingSite,
   [key('real-world-projects', 'component-library')]: componentLibrary,

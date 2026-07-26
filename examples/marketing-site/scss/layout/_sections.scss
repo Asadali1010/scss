@@ -1,0 +1,130 @@
+@use 'sass:map';
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.section {
+  @include section-padding;
+}
+
+.section--light {
+  background-color: map.get($brand, stone-50);
+  color: map.get($brand, stone-800);
+}
+
+.section--muted {
+  background-color: map.get($brand, stone-100);
+  color: map.get($brand, stone-800);
+}
+
+.section__inner {
+  @include container;
+}
+
+.section__header {
+  max-width: 42rem;
+  margin-bottom: map.get($spacing, lg);
+}
+
+.section__eyebrow {
+  margin: 0 0 map.get($spacing, xs);
+  font-size: map.get($type-scale, small);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: map.get($brand, teal-700);
+}
+
+.section__title {
+  margin: 0 0 map.get($spacing, sm);
+  font-family: $font-display;
+  font-size: map.get($type-scale, h2);
+  font-weight: 600;
+  line-height: map.get($line-heights, snug);
+}
+
+.section__lead {
+  margin: 0;
+  font-size: map.get($type-scale, lead);
+  line-height: map.get($line-heights, relaxed);
+  color: map.get($brand, stone-700);
+}
+
+.feature-grid {
+  display: grid;
+  gap: map.get($spacing, md);
+
+  @include breakpoint-up(md) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: map.get($spacing, lg);
+  }
+}
+
+.feature {
+  padding: map.get($spacing, md);
+}
+
+.feature__title {
+  margin: 0 0 map.get($spacing, xs);
+  font-family: $font-display;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: map.get($brand, teal-800);
+}
+
+.feature__text {
+  margin: 0;
+  font-size: map.get($type-scale, body);
+  line-height: map.get($line-heights, normal);
+  color: map.get($brand, stone-700);
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: rgb(10 61 61 / 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgb(255 255 255 / 0.08);
+}
+
+.site-header__inner {
+  @include container;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 3.5rem;
+  padding-block: map.get($spacing, xs);
+}
+
+.site-header__logo {
+  font-family: $font-display;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: map.get($brand, white);
+  text-decoration: none;
+}
+
+.site-nav {
+  display: none;
+  gap: map.get($spacing, md);
+
+  @include breakpoint-up(md) {
+    display: flex;
+  }
+}
+
+.site-nav__link {
+  color: map.get($brand, teal-100);
+  font-size: map.get($type-scale, small);
+  font-weight: 500;
+  text-decoration: none;
+
+  &:hover {
+    color: map.get($brand, white);
+  }
+
+  &:focus-visible {
+    outline: 2px solid map.get($brand, amber-400);
+    outline-offset: 2px;
+  }
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design System Migration — Legacy vs Modular SCSS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="migration-demo">
+      <header class="migration-demo__header">
+        <h1 class="migration-demo__title">Design System Migration</h1>
+        <p class="migration-demo__subtitle">
+          Side-by-side comparison of legacy global SCSS vs @use/@forward modular output — examples/design-system-migration/
+        </p>
+      </header>
+
+      <div class="migration-demo__grid">
+        <section class="migration-demo__column migration-demo__column--legacy" aria-labelledby="legacy-heading">
+          <h2 id="legacy-heading" class="migration-demo__column-title">Legacy (@import era)</h2>
+          <p class="migration-demo__column-desc">Global variables, duplicated hex values, Arial stack — scss/legacy/_legacy.scss</p>
+          <div class="migration-demo__stack">
+            <div class="legacy-card">
+              <h3 class="legacy-card__title">Account settings</h3>
+              <p class="legacy-card__body">Update your profile and notification preferences.</p>
+            </div>
+            <div class="legacy-alert">Migration in progress — legacy styles remain active.</div>
+            <div class="legacy-panel">
+              <p>Confirm changes before saving.</p>
+              <button type="button" class="legacy-btn">Save changes</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="migration-demo__column migration-demo__column--modern" aria-labelledby="modern-heading">
+          <h2 id="modern-heading" class="migration-demo__column-title">Modern (@use / @forward)</h2>
+          <p class="migration-demo__column-desc">Token module + namespaced components — scss/modern/_modern.scss</p>
+          <div class="migration-demo__stack">
+            <div class="card">
+              <h3 class="card__title">Account settings</h3>
+              <p class="card__body">Update your profile and notification preferences.</p>
+            </div>
+            <div class="alert">Migration in progress — token-driven styles are live.</div>
+            <div class="panel">
+              <p>Confirm changes before saving.</p>
+              <button type="button" class="btn">Save changes</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <pre class="migration-demo__code-hint" aria-label="Compile commands"><code># Compile all three examples (or run npm run scss:build:examples):
+sass examples/design-system-migration/scss/main.scss examples/design-system-migration/css/main.css --style=compressed
+sass examples/dashboard-ui/scss/main.scss examples/dashboard-ui/css/main.css --style=compressed
+sass examples/marketing-site/scss/main.scss examples/marketing-site/css/main.css --style=compressed</code></pre>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,129 @@
+// Form component — field groups use stack; inline rows use cluster (checkbox + label).
+@use 'sass:map';
+@use '../../../shared/scss/abstracts/tokens' as tokens;
+@use '../config' as config;
+@use '../layout/stack-cluster' as layout;
+
+.form {
+  --form-gap: #{map.get(tokens.$spacing, 6)};
+  --form-field-gap: #{map.get(tokens.$spacing, 2)};
+  --form-label-color: var(--color-text, #{map.get(tokens.$colors, stone-900)});
+  --form-input-bg: var(--color-surface-raised, #{map.get(tokens.$colors, white)});
+  --form-input-border: var(--color-border, #ddd9d0);
+  --form-input-radius: #{config.$radius-md};
+  --form-input-padding-x: #{map.get(tokens.$spacing, 3)};
+  --form-input-padding-y: #{map.get(tokens.$spacing, 2)};
+  --form-error-color: #b42318;
+  --form-hint-color: var(--color-text-muted, #{map.get(tokens.$colors, stone-700)});
+
+  @include layout.stack(var(--form-gap));
+
+  &__section {
+    @include layout.stack(map.get(tokens.$spacing, 4));
+  }
+
+  &__section-title {
+    margin: 0;
+    font-size: var(--font-size-base, #{map.get(tokens.$font-sizes, base)});
+    font-weight: 600;
+    color: var(--form-label-color);
+  }
+
+  &__field {
+    @include layout.stack(var(--form-field-gap));
+  }
+
+  &__label {
+    font-size: var(--font-size-sm, #{map.get(tokens.$font-sizes, sm)});
+    font-weight: 500;
+    color: var(--form-label-color);
+  }
+
+  &__required {
+    color: var(--form-error-color);
+    margin-inline-start: map.get(tokens.$spacing, 1);
+  }
+
+  &__input,
+  &__textarea,
+  &__select {
+    width: 100%;
+    min-height: config.$min-touch-target;
+    padding: var(--form-input-padding-y) var(--form-input-padding-x);
+    border: 1px solid var(--form-input-border);
+    border-radius: var(--form-input-radius);
+    background-color: var(--form-input-bg);
+    color: var(--color-text, #{map.get(tokens.$colors, stone-900)});
+    font-family: inherit;
+    font-size: var(--font-size-base, #{map.get(tokens.$font-sizes, base)});
+    line-height: map.get(tokens.$line-heights, normal);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+    &::placeholder {
+      color: var(--color-text-muted, #{map.get(tokens.$colors, stone-700)});
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-accent, #{map.get(tokens.$colors, orange-500)});
+      box-shadow: 0 0 0 3px var(--color-accent-subtle, #fef3e8);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    &--error {
+      --form-input-border: var(--form-error-color);
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgb(180 35 24 / 15%);
+      }
+    }
+  }
+
+  &__textarea {
+    min-height: 6rem;
+    resize: vertical;
+  }
+
+  &__hint {
+    margin: 0;
+    font-size: var(--font-size-xs, #{map.get(tokens.$font-sizes, xs)});
+    color: var(--form-hint-color);
+  }
+
+  &__error {
+    margin: 0;
+    font-size: var(--font-size-xs, #{map.get(tokens.$font-sizes, xs)});
+    color: var(--form-error-color);
+  }
+
+  /// Checkbox/radio row — cluster pattern from Every Layout docs.
+  &__inline {
+    @include layout.cluster(map.get(tokens.$spacing, 2));
+  }
+
+  &__checkbox-label {
+    @include layout.cluster(map.get(tokens.$spacing, 2));
+
+    cursor: pointer;
+    font-size: var(--font-size-sm, #{map.get(tokens.$font-sizes, sm)});
+    color: var(--form-label-color);
+  }
+
+  &__actions {
+    @include layout.cluster(map.get(tokens.$spacing, 3));
+
+    padding-top: map.get(tokens.$spacing, 2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form__input,
+  .form__textarea,
+  .form__select {
+    transition: none;
+  }
+}

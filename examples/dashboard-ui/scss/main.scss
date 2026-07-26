@@ -1,0 +1,21 @@
+// PulseMetrics Dashboard — 7-1 / ITCSS-style entry
+// Compile: sass examples/dashboard-ui/scss/main.scss examples/dashboard-ui/css/main.css --style=compressed
+
+@use 'themes/default';
+@use 'layout/shell';
+@use 'layout/sidebar';
+@use 'components/kpi-card';
+@use 'components/data-table';
+@use 'pages/dashboard';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--dash-surface);
+  color: var(--dash-text);
+}

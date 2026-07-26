@@ -1,0 +1,33 @@
+@use 'sass:map';
+@use '../abstracts/tokens' as tokens;
+
+/// Dark theme semantic color map (mirrors light theme keys).
+$theme-dark: (
+  surface: map.get(tokens.$colors, stone-800),
+  surface-raised: #1c1a18,
+  surface-muted: #252320,
+  text: #f5f3ef,
+  text-muted: #a8a299,
+  border: #3a3732,
+  accent: map.get(tokens.$colors, orange-400),
+  accent-hover: #f5954f,
+  accent-subtle: #2a1f14,
+) !default;
+
+$theme-dark-tokens: map.merge(
+  $theme-dark,
+  (
+    font-display: map.get(tokens.$font-families, display),
+    font-body: map.get(tokens.$font-families, body),
+    font-mono: map.get(tokens.$font-families, mono),
+    grid-gutter: tokens.$grid-gutter,
+    grid-columns: tokens.$grid-columns,
+  )
+) !default;
+
+/// Emit dark theme CSS custom properties.
+@mixin emit-theme-vars($prefix: 'color-') {
+  @each $key, $value in $theme-dark-tokens {
+    --#{$prefix}#{$key}: #{$value};
+  }
+}

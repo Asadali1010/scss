@@ -1,0 +1,50 @@
+@use 'sass:meta';
+@use '../abstracts/tokens' as tokens;
+
+$spacing-properties: (
+  m: margin,
+  p: padding,
+) !default;
+
+$spacing-directions: (
+  '': '',
+  t: -top,
+  r: -right,
+  b: -bottom,
+  l: -left,
+  x: (-left, -right),
+  y: (-top, -bottom),
+) !default;
+
+/// Generate margin and padding utility classes from the spacing token map.
+@mixin generate-spacing-utilities($spacing-map: tokens.$spacing) {
+  @each $prop-abbr, $prop-name in $spacing-properties {
+    @each $dir-abbr, $dir-suffix in $spacing-directions {
+      @each $step, $value in $spacing-map {
+        .#{$prop-abbr}#{$dir-abbr}-#{$step} {
+          @if $dir-suffix == '' {
+            #{$prop-name}: $value !important;
+          } @else if meta.type-of($dir-suffix) == 'list' {
+            @each $side in $dir-suffix {
+              #{$prop-name}#{$side}: $value !important;
+            }
+          } @else {
+            #{$prop-name}#{$dir-suffix}: $value !important;
+          }
+        }
+      }
+    }
+  }
+
+  .gap-0 {
+    gap: 0 !important;
+  }
+
+  @each $step, $value in $spacing-map {
+    @if $step != 0 {
+      .gap-#{$step} {
+        gap: $value !important;
+      }
+    }
+  }
+}

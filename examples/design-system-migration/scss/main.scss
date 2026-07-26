@@ -1,0 +1,104 @@
+// Design System Migration — side-by-side legacy vs modular output
+// Compile: sass examples/design-system-migration/scss/main.scss examples/design-system-migration/css/main.css --style=compressed
+
+@use 'legacy/legacy';
+@use 'modern/modern';
+
+// Migration demo layout (abstracts + layout layers)
+$migration-gap: 2rem;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #1a1814;
+  background-color: #f8f7f4;
+}
+
+.migration-demo {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.migration-demo__header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.migration-demo__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.migration-demo__subtitle {
+  margin: 0;
+  color: #5c574f;
+  font-size: 1rem;
+}
+
+.migration-demo__grid {
+  display: grid;
+  gap: $migration-gap;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.migration-demo__column {
+  padding: 1.5rem;
+  border: 1px solid #ddd9d0;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+}
+
+.migration-demo__column-title {
+  margin: 0 0 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.migration-demo__column--legacy .migration-demo__column-title {
+  color: #b42318;
+}
+
+.migration-demo__column--modern .migration-demo__column-title {
+  color: #059669;
+}
+
+.migration-demo__column-desc {
+  margin: 0 0 1.25rem;
+  font-size: 0.8125rem;
+  color: #5c574f;
+}
+
+.migration-demo__stack > * + * {
+  margin-top: 1rem;
+}
+
+.migration-demo__code-hint {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  background-color: #1a1814;
+  color: #f0eeea;
+  font-family: ui-monospace, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+.migration-demo__code-hint code {
+  color: inherit;
+}

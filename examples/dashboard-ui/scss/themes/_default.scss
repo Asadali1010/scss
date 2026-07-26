@@ -1,0 +1,21 @@
+@use 'sass:map';
+@use '../abstracts/variables' as *;
+
+:root {
+  --dash-surface: #{map.get($colors, slate-100)};
+  --dash-surface-raised: #{map.get($colors, white)};
+  --dash-text: #{map.get($colors, slate-950)};
+  --dash-text-muted: #{map.get($colors, slate-500)};
+  --dash-accent: #{map.get($colors, emerald-500)};
+  --dash-accent-hover: #{map.get($colors, emerald-600)};
+  --dash-border: #{map.get($colors, slate-200)};
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

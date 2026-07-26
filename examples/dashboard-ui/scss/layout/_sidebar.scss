@@ -1,0 +1,93 @@
+@use 'sass:map';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  background-color: map.get($colors, slate-900);
+  color: map.get($colors, slate-200);
+
+  @include breakpoint-up(lg) {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+.sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: map.get($spacing, sm);
+  padding: map.get($spacing, lg);
+  border-bottom: 1px solid map.get($colors, slate-800);
+}
+
+.sidebar__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: $radius-md;
+  background: linear-gradient(135deg, map.get($colors, emerald-500), map.get($colors, emerald-600));
+  color: map.get($colors, white);
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.sidebar__name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: map.get($colors, white);
+}
+
+.sidebar__nav {
+  flex: 1;
+  padding: map.get($spacing, md);
+}
+
+.sidebar__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar__item + .sidebar__item {
+  margin-top: map.get($spacing, xs);
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: map.get($spacing, sm);
+  min-height: 2.75rem;
+  padding: map.get($spacing, sm) map.get($spacing, md);
+  border-radius: $radius-md;
+  color: map.get($colors, slate-200);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+
+  @include focus-ring(map.get($colors, emerald-500));
+
+  &:hover {
+    background-color: map.get($colors, slate-800);
+    color: map.get($colors, white);
+  }
+
+  &--active {
+    background-color: map.get($colors, slate-800);
+    color: map.get($colors, emerald-500);
+    font-weight: 600;
+  }
+}
+
+.sidebar__footer {
+  padding: map.get($spacing, lg);
+  border-top: 1px solid map.get($colors, slate-800);
+  font-size: 0.75rem;
+  color: map.get($colors, slate-500);
+}

@@ -1,0 +1,115 @@
+// Navigation component — horizontal and vertical nav patterns with BEM structure.
+@use 'sass:map';
+@use '../../../shared/scss/abstracts/tokens' as tokens;
+@use '../../../shared/scss/tools/breakpoints' as bp;
+@use '../config' as config;
+@use '../layout/stack-cluster' as layout;
+
+.nav {
+  --nav-bg: var(--color-surface-raised, #{map.get(tokens.$colors, white)});
+  --nav-border-color: var(--color-border, #ddd9d0);
+  --nav-link-color: var(--color-text-muted, #{map.get(tokens.$colors, stone-700)});
+  --nav-link-hover-color: var(--color-text, #{map.get(tokens.$colors, stone-900)});
+  --nav-link-active-color: var(--color-accent, #{map.get(tokens.$colors, orange-500)});
+  --nav-link-active-bg: var(--color-accent-subtle, #fef3e8);
+  --nav-item-padding-x: #{map.get(tokens.$spacing, 3)};
+  --nav-item-padding-y: #{map.get(tokens.$spacing, 2)};
+  --nav-item-radius: #{config.$radius-md};
+
+  background-color: var(--nav-bg);
+
+  &--horizontal {
+    border-bottom: 1px solid var(--nav-border-color);
+
+    .nav__list {
+      @include layout.cluster(map.get(tokens.$spacing, 1));
+    }
+  }
+
+  &--vertical {
+    border-inline-end: 1px solid var(--nav-border-color);
+
+    .nav__list {
+      @include layout.stack(map.get(tokens.$spacing, 1));
+    }
+  }
+
+  &__brand {
+    @include layout.cluster(map.get(tokens.$spacing, 2));
+
+    padding: map.get(tokens.$spacing, 4);
+    font-family: var(--color-font-display, #{map.get(tokens.$font-families, display)});
+    font-size: var(--font-size-lg, #{map.get(tokens.$font-sizes, lg)});
+    font-weight: 600;
+    color: var(--color-text, #{map.get(tokens.$colors, stone-900)});
+    text-decoration: none;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: map.get(tokens.$spacing, 2);
+  }
+
+  &__item {
+    margin: 0;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: map.get(tokens.$spacing, 2);
+    min-height: config.$min-touch-target;
+    padding: var(--nav-item-padding-y) var(--nav-item-padding-x);
+    border-radius: var(--nav-item-radius);
+    color: var(--nav-link-color);
+    font-size: var(--font-size-sm, #{map.get(tokens.$font-sizes, sm)});
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      color: var(--nav-link-hover-color);
+      background-color: var(--color-surface-muted, #{map.get(tokens.$colors, stone-100)});
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--nav-link-active-color);
+      outline-offset: 2px;
+    }
+
+    &--active {
+      color: var(--nav-link-active-color);
+      background-color: var(--nav-link-active-bg);
+      font-weight: 600;
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 1.25em;
+    height: 1.25em;
+  }
+
+  &__actions {
+    @include layout.cluster(map.get(tokens.$spacing, 2));
+
+    margin-inline-start: auto;
+    padding: map.get(tokens.$spacing, 2);
+  }
+}
+
+@include bp.breakpoint-down(md) {
+  .nav--horizontal {
+    .nav__list {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav__link {
+    transition: none;
+  }
+}

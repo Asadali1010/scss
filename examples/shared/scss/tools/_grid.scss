@@ -1,0 +1,52 @@
+@use 'sass:math';
+@use 'sass:map';
+@use '../abstracts/tokens' as tokens;
+@use 'breakpoints' as *;
+
+/// Centered responsive container with max-width per breakpoint.
+@mixin container($padding-inline: tokens.$grid-gutter) {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: $padding-inline;
+
+  @each $name, $max-width in tokens.$container-max-widths {
+    @include breakpoint-up($name) {
+      max-width: $max-width;
+    }
+  }
+}
+
+/// CSS Grid row with configurable column count and gutter.
+@mixin grid-row($columns: tokens.$grid-columns, $gutter: tokens.$grid-gutter) {
+  display: grid;
+  grid-template-columns: repeat($columns, minmax(0, 1fr));
+  gap: $gutter;
+}
+
+/// Span a cell across N columns within a grid row.
+@mixin grid-col($span: 1) {
+  grid-column: span $span;
+}
+
+/// Offset a column by N grid tracks.
+@mixin grid-offset($offset: 1) {
+  grid-column-start: $offset + 1;
+}
+
+/// Flexbox-based fallback row (legacy grid support pattern).
+@mixin flex-row($gutter: tokens.$grid-gutter) {
+  display: flex;
+  flex-wrap: wrap;
+  margin-inline: math.div($gutter, -2);
+
+  > * {
+    padding-inline: math.div($gutter, 2);
+  }
+}
+
+/// Flex column width as a fraction of the row.
+@mixin flex-col($span: 1, $columns: tokens.$grid-columns, $gutter: tokens.$grid-gutter) {
+  flex: 0 0 auto;
+  width: math.percentage(math.div($span, $columns));
+  padding-inline: math.div($gutter, 2);
+}

@@ -1,0 +1,63 @@
+@use 'sass:map';
+@use '../abstracts/tokens' as tokens;
+@use '../tools/breakpoints' as *;
+
+$display-values: (
+  none: none,
+  block: block,
+  flex: flex,
+  grid: grid,
+  inline: inline,
+  inline-block: inline-block,
+) !default;
+
+/// Generate responsive display utility classes from breakpoint and display maps.
+@mixin generate-responsive-utilities(
+  $breakpoints-map: tokens.$breakpoints,
+  $displays: $display-values
+) {
+  @each $display-key, $display-value in $displays {
+    .d-#{$display-key} {
+      display: $display-value !important;
+    }
+  }
+
+  @each $bp-name, $bp-value in $breakpoints-map {
+    @if $bp-value != 0 {
+      @each $display-key, $display-value in $displays {
+        .d-#{$bp-name}-#{$display-key} {
+          @include breakpoint-up($bp-name, $breakpoints-map) {
+            display: $display-value !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+/// Generate visibility utilities tied to breakpoints.
+@mixin generate-visibility-utilities($breakpoints-map: tokens.$breakpoints) {
+  .visible {
+    visibility: visible !important;
+  }
+
+  .invisible {
+    visibility: hidden !important;
+  }
+
+  @each $bp-name, $bp-value in $breakpoints-map {
+    @if $bp-value != 0 {
+      .visible-#{$bp-name} {
+        @include breakpoint-up($bp-name, $breakpoints-map) {
+          visibility: visible !important;
+        }
+      }
+
+      .invisible-#{$bp-name} {
+        @include breakpoint-up($bp-name, $breakpoints-map) {
+          visibility: hidden !important;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+// Fjord Labs Marketing Site — 7-1 / ITCSS-style entry
+// Compile: sass examples/marketing-site/scss/main.scss examples/marketing-site/css/main.css --style=compressed
+
+@use 'themes/brand';
+@use 'layout/sections';
+@use 'components/hero';
+@use 'components/button';
+@use 'pages/home';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fjord-font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--fjord-text);
+  background-color: var(--fjord-surface);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--fjord-font-display);
+}

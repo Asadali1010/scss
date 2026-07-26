@@ -1,0 +1,78 @@
+@use 'sass:map';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.kpi-grid {
+  display: grid;
+  gap: map.get($spacing, md);
+  grid-template-columns: 1fr;
+
+  @include breakpoint-up(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoint-up(xl) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.kpi-card {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($spacing, sm);
+  padding: map.get($spacing, lg);
+  background-color: map.get($colors, white);
+  border: 1px solid map.get($colors, slate-200);
+  border-radius: $radius-lg;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+}
+
+.kpi-card__label {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: map.get($colors, slate-500);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.kpi-card__value {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: map.get($colors, slate-950);
+  line-height: 1.2;
+}
+
+.kpi-card__delta {
+  display: inline-flex;
+  align-items: center;
+  gap: map.get($spacing, xs);
+  font-size: 0.8125rem;
+  font-weight: 600;
+
+  &--up {
+    color: map.get($colors, emerald-600);
+  }
+
+  &--down {
+    color: map.get($colors, rose-500);
+  }
+
+  &--neutral {
+    color: map.get($colors, slate-500);
+  }
+}
+
+.kpi-card__sparkline {
+  height: 2rem;
+  margin-top: auto;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    map.get($colors, emerald-50) 50%,
+    transparent 100%
+  );
+  border-radius: $radius-sm;
+}
