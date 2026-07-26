@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useTheme } from '../../context/ThemeContext'
 import Search from '../Search'
@@ -9,9 +10,30 @@ interface TopNavProps {
 export default function TopNav({ onMenuOpen }: TopNavProps) {
   const { theme, toggleTheme } = useTheme()
   const isDark = theme === 'dark'
+  const headerRef = useRef<HTMLElement>(null)
+
+  // The header wraps to a taller stack on narrow viewports, so anything that
+  // offsets against it reads the measured height instead of a fixed guess.
+  useEffect(() => {
+    const header = headerRef.current
+    if (!header) return
+
+    const publishHeight = () => {
+      document.documentElement.style.setProperty(
+        '--header-h',
+        `${header.getBoundingClientRect().height}px`,
+      )
+    }
+
+    publishHeight()
+    const observer = new ResizeObserver(publishHeight)
+    observer.observe(header)
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <header
+      ref={headerRef}
       className="sticky top-0 z-30 border-b"
       style={{
         backgroundColor: 'var(--color-surface-raised)',

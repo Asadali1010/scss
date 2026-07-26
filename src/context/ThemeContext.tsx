@@ -48,7 +48,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     applyTheme(theme)
-    localStorage.setItem(STORAGE_KEY, theme)
   }, [theme])
 
   useEffect(() => {
@@ -64,12 +63,19 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     return () => media.removeEventListener('change', handleChange)
   }, [])
 
+  // Only an explicit choice is persisted — while storage stays empty the
+  // provider keeps following the OS preference.
   const setTheme = useCallback((next: Theme) => {
+    localStorage.setItem(STORAGE_KEY, next)
     setThemeState(next)
   }, [])
 
   const toggleTheme = useCallback(() => {
-    setThemeState((current) => (current === 'light' ? 'dark' : 'light'))
+    setThemeState((current) => {
+      const next = current === 'light' ? 'dark' : 'light'
+      localStorage.setItem(STORAGE_KEY, next)
+      return next
+    })
   }, [])
 
   return (

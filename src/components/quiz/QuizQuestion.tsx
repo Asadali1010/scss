@@ -1,5 +1,6 @@
 import type { QuizQuestion as QuizQuestionType } from '../../types/quiz'
 import CodeMirrorEditor from './CodeMirrorEditor'
+import PromptText from './PromptText'
 
 export type QuizResult = 'idle' | 'correct' | 'incorrect'
 
@@ -28,7 +29,9 @@ export default function QuizQuestion({
         <h2 id={`quiz-title-${question.id}`} className="quiz-question__title">
           {question.title}
         </h2>
-        <p className="quiz-question__prompt">{question.prompt}</p>
+        <p className="quiz-question__prompt">
+          <PromptText text={question.prompt} />
+        </p>
       </header>
 
       <div className="quiz-question__editor-wrap">
@@ -62,7 +65,8 @@ export default function QuizQuestion({
           <p className="quiz-feedback__message">{feedbackMessage}</p>
           {result === 'incorrect' && (
             <p className="quiz-feedback__hint">
-              <span className="quiz-feedback__hint-label">Hint:</span> {question.hint}
+              <span className="quiz-feedback__hint-label">Hint:</span>{' '}
+              <PromptText text={question.hint} />
             </p>
           )}
         </div>

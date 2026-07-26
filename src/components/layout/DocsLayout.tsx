@@ -13,7 +13,7 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
 
   return (
     <div
-      className="min-h-screen overflow-x-hidden"
+      className="min-h-screen overflow-x-clip"
       style={{
         backgroundColor: 'var(--color-surface)',
         color: 'var(--color-text)',
@@ -30,7 +30,7 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
             backgroundColor: 'var(--color-surface-raised)',
           }}
         >
-          <div className="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto overflow-x-hidden p-4">
+          <div className="sticky top-(--header-h) max-h-[calc(100vh-var(--header-h))] overflow-y-auto overflow-x-hidden p-4">
             <Sidebar />
           </div>
         </aside>
