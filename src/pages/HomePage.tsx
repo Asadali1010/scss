@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
 import { navigation } from '../data/navigation'
-import { sectionPath } from '../utils/routes'
+import { quizPath, sectionPath } from '../utils/routes'
 
 export default function HomePage() {
   const { theme, toggleTheme } = useTheme()
@@ -80,18 +80,33 @@ export default function HomePage() {
             Structured guides for variables, nesting, mixins, modules, and the patterns teams
             rely on in production SCSS.
           </p>
-          <Link
-            to={sectionPath(firstSection.slug)}
-            className="inline-flex min-h-11 items-center rounded-lg px-8 py-3 text-base font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-            style={{
-              backgroundColor: 'var(--color-accent)',
-              color: 'var(--color-surface-raised)',
-              outlineColor: 'var(--color-accent)',
-              fontFamily: 'var(--font-body)',
-            }}
-          >
-            Browse documentation
-          </Link>
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link
+              to={sectionPath(firstSection.slug)}
+              className="inline-flex min-h-11 items-center rounded-lg px-8 py-3 text-base font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              style={{
+                backgroundColor: 'var(--color-accent)',
+                color: 'var(--color-surface-raised)',
+                outlineColor: 'var(--color-accent)',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              Browse documentation
+            </Link>
+            <Link
+              to={quizPath()}
+              className="inline-flex min-h-11 items-center rounded-lg border px-8 py-3 text-base font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              style={{
+                backgroundColor: 'var(--color-surface-raised)',
+                borderColor: 'var(--color-border)',
+                color: 'var(--color-text)',
+                outlineColor: 'var(--color-accent)',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              Take the quiz
+            </Link>
+          </div>
         </div>
       </header>
     </div>

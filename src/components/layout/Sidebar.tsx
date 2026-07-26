@@ -1,7 +1,7 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { navigation } from '../../data/navigation'
-import { pagePath, sectionPath } from '../../utils/routes'
+import { navItemPath, pagePath } from '../../utils/routes'
 
 interface SidebarProps {
   onNavigate?: () => void
@@ -28,7 +28,7 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
 
   useEffect(() => {
     const activeSection = navigation.find((section) => {
-      const base = sectionPath(section.slug)
+      const base = navItemPath(section)
       return pathname === base || pathname.startsWith(`${base}/`)
     })
 
@@ -74,7 +74,7 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
     <nav aria-label="Documentation">
       <ul className="space-y-1">
         {navigation.map((section) => {
-          const basePath = sectionPath(section.slug)
+          const basePath = navItemPath(section)
           const hasChildren = Boolean(section.children?.length)
           const isSectionActive =
             pathname === basePath || pathname.startsWith(`${basePath}/`)

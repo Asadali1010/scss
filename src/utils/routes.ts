@@ -10,6 +10,16 @@ export function pagePath(sectionSlug: string, pageSlug: string): string {
   return `/docs/${sectionSlug}/${pageSlug}`
 }
 
+export function quizPath(): string {
+  return '/quiz'
+}
+
+export function navItemPath(item: NavItem, sectionSlug?: string): string {
+  if (item.path) return item.path
+  if (sectionSlug) return pagePath(sectionSlug, item.slug)
+  return sectionPath(item.slug)
+}
+
 export interface BreadcrumbItem {
   label: string
   path?: string
@@ -52,8 +62,8 @@ export function flattenNavigationForSearch(items: NavItem[] = navigation): Searc
   for (const section of items) {
     results.push({
       title: section.title,
-      path: sectionPath(section.slug),
-      context: 'Section',
+      path: navItemPath(section),
+      context: section.path ? 'Practice' : 'Section',
     })
 
     for (const page of section.children ?? []) {
