@@ -1,0 +1,90 @@
+@use 'sass:map';
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background-color: map.get($brand, teal-900);
+  color: map.get($brand, white);
+}
+
+.hero__inner {
+  @include container;
+  @include section-padding;
+  display: grid;
+  gap: map.get($spacing, lg);
+  align-items: center;
+  min-height: min(90vh, 52rem);
+
+  @include breakpoint-up(lg) {
+    grid-template-columns: 1fr 1fr;
+    gap: map.get($spacing, xl);
+  }
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__eyebrow {
+  margin: 0 0 map.get($spacing, sm);
+  font-family: $font-body;
+  font-size: map.get($type-scale, small);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: map.get($brand, amber-400);
+}
+
+.hero__title {
+  margin: 0 0 map.get($spacing, md);
+  font-family: $font-display;
+  font-size: map.get($type-scale, display);
+  font-weight: 600;
+  line-height: map.get($line-heights, tight);
+}
+
+.hero__lead {
+  margin: 0 0 map.get($spacing, lg);
+  max-width: 36ch;
+  font-size: map.get($type-scale, lead);
+  line-height: map.get($line-heights, relaxed);
+  color: map.get($brand, teal-100);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: map.get($spacing, sm);
+}
+
+.hero__visual {
+  position: relative;
+  min-height: 16rem;
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(160deg, rgb(13 79 79 / 0.2) 0%, transparent 60%),
+    linear-gradient(135deg, map.get($brand, teal-700) 0%, map.get($brand, teal-800) 40%, map.get($brand, teal-900) 100%);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 70% 30%, rgb(245 158 11 / 0.25) 0%, transparent 45%),
+      radial-gradient(circle at 20% 80%, rgb(212 236 236 / 0.15) 0%, transparent 40%);
+    pointer-events: none;
+  }
+}
+
+.hero__visual-caption {
+  position: absolute;
+  bottom: map.get($spacing, md);
+  left: map.get($spacing, md);
+  font-size: map.get($type-scale, small);
+  color: map.get($brand, teal-100);
+  opacity: 0.85;
+}

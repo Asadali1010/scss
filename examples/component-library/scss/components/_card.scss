@@ -1,0 +1,93 @@
+// Card component — content container with optional elevation and bordered variants.
+@use 'sass:map';
+@use '../../../shared/scss/abstracts/tokens' as tokens;
+@use '../config' as config;
+@use '../layout/stack-cluster' as layout;
+
+.card {
+  --card-bg: var(--color-surface-raised, #{map.get(tokens.$colors, white)});
+  --card-border-color: var(--color-border, #ddd9d0);
+  --card-radius: #{config.$radius-lg};
+  --card-padding: #{map.get(tokens.$spacing, 6)};
+  --card-shadow: 0 1px 3px rgb(26 24 20 / 8%);
+
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--card-border-color);
+  border-radius: var(--card-radius);
+  background-color: var(--card-bg);
+  overflow: hidden;
+
+  &--elevated {
+    border-color: transparent;
+    box-shadow: var(--card-shadow);
+  }
+
+  &--bordered {
+    box-shadow: none;
+  }
+
+  &--interactive {
+    cursor: pointer;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+      --card-shadow: 0 4px 12px rgb(26 24 20 / 12%);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-accent, #{map.get(tokens.$colors, orange-500)});
+      outline-offset: 2px;
+    }
+  }
+
+  &__header {
+    padding: var(--card-padding);
+    padding-bottom: map.get(tokens.$spacing, 4);
+    border-bottom: 1px solid var(--card-border-color);
+  }
+
+  &__title {
+    margin: 0;
+    font-family: var(--color-font-display, #{map.get(tokens.$font-families, display)});
+    font-size: var(--font-size-lg, #{map.get(tokens.$font-sizes, lg)});
+    font-weight: 600;
+    line-height: map.get(tokens.$line-heights, snug);
+    color: var(--color-text, #{map.get(tokens.$colors, stone-900)});
+  }
+
+  &__subtitle {
+    margin: map.get(tokens.$spacing, 1) 0 0;
+    font-size: var(--font-size-sm, #{map.get(tokens.$font-sizes, sm)});
+    color: var(--color-text-muted, #{map.get(tokens.$colors, stone-700)});
+  }
+
+  &__body {
+    @include layout.stack(map.get(tokens.$spacing, 4));
+
+    flex: 1;
+    padding: var(--card-padding);
+    color: var(--color-text, #{map.get(tokens.$colors, stone-900)});
+  }
+
+  &__footer {
+    @include layout.cluster(map.get(tokens.$spacing, 3));
+
+    padding: map.get(tokens.$spacing, 4) var(--card-padding);
+    border-top: 1px solid var(--card-border-color);
+    background-color: var(--color-surface-muted, #{map.get(tokens.$colors, stone-100)});
+  }
+
+  &__media {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card--interactive {
+    transition: none;
+  }
+}

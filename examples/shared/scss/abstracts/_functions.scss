@@ -1,0 +1,59 @@
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+@use 'tokens' as *;
+
+/// Convert px to rem based on a configurable root size.
+@function rem($px, $base: 16) {
+  @if meta.type-of($px) != 'number' or not math.is-unitless($px) {
+    @return $px;
+  }
+
+  @return math.div($px, $base) * 1rem;
+}
+
+/// Strip unit from a numeric value.
+@function strip-unit($value) {
+  @if meta.type-of($value) != 'number' {
+    @return $value;
+  }
+
+  @return math.div($value, $value * 0 + 1);
+}
+
+/// Retrieve the next breakpoint name after the given key.
+@function breakpoint-next($name, $breakpoints-map: $breakpoints) {
+  $names: map.keys($breakpoints-map);
+  $index: list.index($names, $name);
+
+  @if $index == null or $index >= list.length($names) {
+    @return null;
+  }
+
+  @return list.nth($names, $index + 1);
+}
+
+/// Minimum width for a breakpoint (0 for the first tier).
+@function breakpoint-min($name, $breakpoints-map: $breakpoints) {
+  $min: map.get($breakpoints-map, $name);
+  @return if($min != 0, $min, null);
+}
+
+/// Maximum width for a breakpoint (exclusive upper bound).
+@function breakpoint-max($name, $breakpoints-map: $breakpoints) {
+  $next: breakpoint-next($name, $breakpoints-map);
+
+  @if $next {
+    @return breakpoint-min($next, $breakpoints-map) - 0.02px;
+  }
+
+  @return null;
+}
+
+/// Emit CSS custom properties from a flat token map.
+@mixin emit-css-vars($tokens, $prefix: '') {
+  @each $key, $value in $tokens {
+    --#{$prefix}#{$key}: #{$value};
+  }
+}

@@ -1,0 +1,36 @@
+@use 'sass:math';
+@use 'sass:map';
+@use '../abstracts/functions' as fn;
+
+/// Fluid typography between min and max viewport widths.
+@mixin fluid-type($min-size, $max-size, $min-vw: 320px, $max-vw: 1200px) {
+  $min-size-unitless: fn.strip-unit($min-size);
+  $max-size-unitless: fn.strip-unit($max-size);
+  $min-vw-unitless: fn.strip-unit($min-vw);
+  $max-vw-unitless: fn.strip-unit($max-vw);
+
+  $slope: math.div(
+    $max-size-unitless - $min-size-unitless,
+    $max-vw-unitless - $min-vw-unitless
+  );
+  $intercept: $min-size-unitless - $slope * $min-vw-unitless;
+
+  font-size: clamp(
+    #{$min-size},
+    #{$intercept * 1rem} + #{$slope * 100vw},
+    #{$max-size}
+  );
+}
+
+/// Fluid type using a named step from the font-size token map.
+@mixin fluid-type-step($min-step, $max-step, $font-sizes, $min-vw: 320px, $max-vw: 1200px) {
+  $min-size: map.get($font-sizes, $min-step);
+  $max-size: map.get($font-sizes, $max-step);
+
+  @include fluid-type($min-size, $max-size, $min-vw, $max-vw);
+}
+
+/// Set line-height from the token map.
+@mixin line-height($key, $line-heights) {
+  line-height: map.get($line-heights, $key);
+}

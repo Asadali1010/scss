@@ -1,0 +1,67 @@
+// Legacy design system — simulates pre-module @import-era patterns.
+// Values are duplicated and global; no namespacing.
+
+$legacy-primary: #0066cc !default;
+$legacy-primary-hover: #0052a3 !default;
+$legacy-text: #333333 !default;
+$legacy-border: #cccccc !default;
+$legacy-radius: 4px !default;
+$legacy-spacing: 12px 24px !default;
+
+.legacy-btn {
+  display: inline-block;
+  padding: $legacy-spacing;
+  border: none;
+  border-radius: $legacy-radius;
+  background-color: $legacy-primary;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $legacy-primary-hover;
+  }
+}
+
+.legacy-card {
+  padding: 16px;
+  border: 1px solid $legacy-border;
+  border-radius: $legacy-radius;
+  background-color: #ffffff;
+  color: $legacy-text;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+
+  &__title {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  &__body {
+    margin: 0;
+    line-height: 1.4;
+  }
+}
+
+.legacy-alert {
+  padding: 12px 16px;
+  border-left: 4px solid $legacy-primary;
+  background-color: #e6f0fa;
+  color: $legacy-text;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.legacy-panel {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid $legacy-border;
+
+  .legacy-btn {
+    margin-top: 12px;
+  }
+}

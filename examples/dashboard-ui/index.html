@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PulseMetrics — Dashboard UI Example</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <div class="sidebar__brand">
+          <span class="sidebar__logo" aria-hidden="true">PM</span>
+          <span class="sidebar__name">PulseMetrics</span>
+        </div>
+        <nav class="sidebar__nav">
+          <ul class="sidebar__list">
+            <li class="sidebar__item">
+              <a class="sidebar__link sidebar__link--active" href="#" aria-current="page">Overview</a>
+            </li>
+            <li class="sidebar__item">
+              <a class="sidebar__link" href="#">Customers</a>
+            </li>
+            <li class="sidebar__item">
+              <a class="sidebar__link" href="#">Reports</a>
+            </li>
+            <li class="sidebar__item">
+              <a class="sidebar__link" href="#">Settings</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="sidebar__footer">SCSS 7-1 example — examples/dashboard-ui/</div>
+      </aside>
+
+      <header class="app-shell__header">
+        <h1 class="app-shell__title">Overview</h1>
+        <span class="page-dashboard__period">Last 30 days</span>
+      </header>
+
+      <main class="app-shell__main">
+        <div class="app-shell__content-grid">
+          <section aria-labelledby="kpi-heading">
+            <h2 id="kpi-heading" class="page-dashboard__section-title">Key metrics</h2>
+            <div class="kpi-grid">
+              <article class="kpi-card">
+                <p class="kpi-card__label">Active users</p>
+                <p class="kpi-card__value">12,847</p>
+                <span class="kpi-card__delta kpi-card__delta--up">+8.2%</span>
+                <div class="kpi-card__sparkline" aria-hidden="true"></div>
+              </article>
+              <article class="kpi-card">
+                <p class="kpi-card__label">Revenue</p>
+                <p class="kpi-card__value">$284K</p>
+                <span class="kpi-card__delta kpi-card__delta--up">+12.4%</span>
+                <div class="kpi-card__sparkline" aria-hidden="true"></div>
+              </article>
+              <article class="kpi-card">
+                <p class="kpi-card__label">Churn rate</p>
+                <p class="kpi-card__value">2.1%</p>
+                <span class="kpi-card__delta kpi-card__delta--down">+0.3%</span>
+                <div class="kpi-card__sparkline" aria-hidden="true"></div>
+              </article>
+              <article class="kpi-card">
+                <p class="kpi-card__label">NPS score</p>
+                <p class="kpi-card__value">72</p>
+                <span class="kpi-card__delta kpi-card__delta--neutral">—</span>
+                <div class="kpi-card__sparkline" aria-hidden="true"></div>
+              </article>
+            </div>
+          </section>
+
+          <section class="data-panel" aria-labelledby="table-heading">
+            <div class="data-panel__header">
+              <h2 id="table-heading" class="data-panel__title">Recent accounts</h2>
+            </div>
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>Recent customer accounts and subscription status</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Account</th>
+                    <th scope="col">Plan</th>
+                    <th scope="col">MRR</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="data-table__primary">Northwind Analytics</td>
+                    <td>Enterprise</td>
+                    <td class="data-table__mono">$4,200</td>
+                    <td><span class="data-table__badge data-table__badge--active">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td class="data-table__primary">Coastal Labs</td>
+                    <td>Pro</td>
+                    <td class="data-table__mono">$890</td>
+                    <td><span class="data-table__badge data-table__badge--active">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td class="data-table__primary">Summit Retail</td>
+                    <td>Starter</td>
+                    <td class="data-table__mono">$149</td>
+                    <td><span class="data-table__badge data-table__badge--pending">Pending</span></td>
+                  </tr>
+                  <tr>
+                    <td class="data-table__primary">Harbor Freight Co</td>
+                    <td>Pro</td>
+                    <td class="data-table__mono">$0</td>
+                    <td><span class="data-table__badge data-table__badge--inactive">Inactive</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

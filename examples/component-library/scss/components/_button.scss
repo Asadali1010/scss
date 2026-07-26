@@ -1,0 +1,97 @@
+// Button component — BEM block `.btn` with variant modifiers and theming hooks.
+@use 'sass:map';
+@use '../../../shared/scss/abstracts/tokens' as tokens;
+@use '../config' as config;
+
+.btn {
+  --btn-bg: var(--color-accent, #{map.get(tokens.$colors, orange-500)});
+  --btn-bg-hover: var(--color-accent-hover, #{map.get(tokens.$colors, orange-600)});
+  --btn-color: var(--color-white, #{map.get(tokens.$colors, white)});
+  --btn-border-color: transparent;
+  --btn-padding-x: #{map.get(tokens.$spacing, 4)};
+  --btn-padding-y: #{map.get(tokens.$spacing, 2)};
+  --btn-radius: #{config.$radius-md};
+  --btn-font-size: var(--font-size-sm, #{map.get(tokens.$font-sizes, sm)});
+  --btn-min-height: #{config.$min-touch-target};
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: map.get(tokens.$spacing, 2);
+  min-height: var(--btn-min-height);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  border: 1px solid var(--btn-border-color);
+  border-radius: var(--btn-radius);
+  background-color: var(--btn-bg);
+  color: var(--btn-color);
+  font-family: inherit;
+  font-size: var(--btn-font-size);
+  font-weight: 600;
+  line-height: map.get(tokens.$line-heights, tight);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background-color: var(--btn-bg-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--btn-bg);
+    outline-offset: 2px;
+  }
+
+  &:disabled,
+  &--disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  &--primary {
+    --btn-bg: var(--color-accent, #{map.get(tokens.$colors, orange-500)});
+    --btn-bg-hover: var(--color-accent-hover, #{map.get(tokens.$colors, orange-600)});
+    --btn-color: var(--color-white, #{map.get(tokens.$colors, white)});
+  }
+
+  &--ghost {
+    --btn-bg: transparent;
+    --btn-bg-hover: var(--color-accent-subtle, #fef3e8);
+    --btn-color: var(--color-accent, #{map.get(tokens.$colors, orange-500)});
+    --btn-border-color: var(--color-accent, #{map.get(tokens.$colors, orange-500)});
+  }
+
+  &--danger {
+    --btn-bg: #b42318;
+    --btn-bg-hover: #912018;
+    --btn-color: var(--color-white, #{map.get(tokens.$colors, white)});
+  }
+
+  &--sm {
+    --btn-padding-x: #{map.get(tokens.$spacing, 3)};
+    --btn-padding-y: #{map.get(tokens.$spacing, 1)};
+    --btn-font-size: var(--font-size-xs, #{map.get(tokens.$font-sizes, xs)});
+    --btn-min-height: 2rem;
+  }
+
+  &--lg {
+    --btn-padding-x: #{map.get(tokens.$spacing, 6)};
+    --btn-padding-y: #{map.get(tokens.$spacing, 3)};
+    --btn-font-size: var(--font-size-base, #{map.get(tokens.$font-sizes, base)});
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 1.25em;
+    height: 1.25em;
+  }
+
+  &__label {
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}

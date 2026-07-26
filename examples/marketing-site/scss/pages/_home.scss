@@ -1,0 +1,28 @@
+@use 'sass:map';
+@use '../abstracts/tokens' as *;
+
+.page-home {
+  // Page-specific overrides live here when a route needs unique spacing.
+  .section:first-of-type {
+    padding-top: 0;
+  }
+}
+
+.cta-banner {
+  text-align: center;
+}
+
+.cta-banner__title {
+  margin: 0 0 map.get($spacing, sm);
+  font-family: $font-display;
+  font-size: map.get($type-scale, h1);
+  line-height: map.get($line-heights, tight);
+}
+
+.cta-banner__text {
+  margin: 0 auto map.get($spacing, lg);
+  max-width: 40ch;
+  font-size: map.get($type-scale, lead);
+  line-height: map.get($line-heights, relaxed);
+  color: map.get($brand, stone-700);
+}

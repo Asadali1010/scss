@@ -1,0 +1,74 @@
+@use 'sass:map';
+@use '../abstracts/tokens' as tokens;
+@use '../abstracts/functions' as fn;
+
+/// Apply styles from the given breakpoint and up (mobile-first).
+@mixin breakpoint-up($name, $breakpoints-map: tokens.$breakpoints) {
+  $min: fn.breakpoint-min($name, $breakpoints-map);
+
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+/// Apply styles below the given breakpoint.
+@mixin breakpoint-down($name, $breakpoints-map: tokens.$breakpoints) {
+  $max: fn.breakpoint-max($name, $breakpoints-map);
+
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  }
+}
+
+/// Apply styles between two breakpoints (inclusive lower, exclusive upper).
+@mixin breakpoint-between($lower, $upper, $breakpoints-map: tokens.$breakpoints) {
+  $min: fn.breakpoint-min($lower, $breakpoints-map);
+  $max: fn.breakpoint-max($upper, $breakpoints-map);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include breakpoint-up($lower, $breakpoints-map) {
+      @content;
+    }
+  } @else if $min == null {
+    @include breakpoint-down($upper, $breakpoints-map) {
+      @content;
+    }
+  }
+}
+
+/// Apply styles only within a single breakpoint tier.
+@mixin breakpoint-only($name, $breakpoints-map: tokens.$breakpoints) {
+  $min: fn.breakpoint-min($name, $breakpoints-map);
+  $max: fn.breakpoint-max($name, $breakpoints-map);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include breakpoint-up($name, $breakpoints-map) {
+      @content;
+    }
+  } @else if $min == null {
+    @include breakpoint-down($name, $breakpoints-map) {
+      @content;
+    }
+  }
+}
+
+/// Shorthand alias for breakpoint-up.
+@mixin media($name) {
+  @include breakpoint-up($name) {
+    @content;
+  }
+}

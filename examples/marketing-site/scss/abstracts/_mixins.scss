@@ -1,0 +1,27 @@
+@use 'sass:map';
+@use 'tokens' as *;
+
+@mixin breakpoint-up($name) {
+  $width: map.get($breakpoints, $name);
+
+  @if $width {
+    @media (min-width: $width) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin container {
+  width: min(100% - 2rem, $container-max);
+  margin-inline: auto;
+}
+
+@mixin section-padding {
+  padding-block: map.get($spacing, lg);
+
+  @include breakpoint-up(md) {
+    padding-block: $section-padding-y;
+  }
+}

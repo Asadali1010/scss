@@ -1,0 +1,51 @@
+// Stack & Cluster layout patterns (Every Layout) — vertical rhythm and wrapping groups.
+@use 'sass:map';
+@use '../../../shared/scss/abstracts/tokens' as tokens;
+@use '../config' as config;
+
+/// Vertical stack — replaces margin-bottom on every child with flex gap.
+@mixin stack($gap: config.$stack-gap-default) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+/// Horizontal cluster — wraps items with consistent gap (tags, button groups, toolbars).
+@mixin cluster($gap: config.$cluster-gap-default) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  align-items: center;
+}
+
+/// Stack utility class — gap overridable via `--stack-gap` custom property.
+.#{config.$layout-prefix}-stack {
+  --stack-gap: #{config.$stack-gap-default};
+
+  @include stack(var(--stack-gap));
+}
+
+/// Cluster utility class — gap overridable via `--cluster-gap` custom property.
+.#{config.$layout-prefix}-cluster {
+  --cluster-gap: #{config.$cluster-gap-default};
+
+  @include cluster(var(--cluster-gap));
+}
+
+/// Size modifiers referencing shared spacing token steps.
+@each $step, $value in tokens.$spacing {
+  @if $step != 0 {
+    .#{config.$layout-prefix}-stack--gap-#{$step} {
+      --stack-gap: #{$value};
+    }
+
+    .#{config.$layout-prefix}-cluster--gap-#{$step} {
+      --cluster-gap: #{$value};
+    }
+  }
+}
+
+/// Split cluster — pushes last child to the trailing edge (toolbar actions pattern).
+.#{config.$layout-prefix}-cluster--split {
+  justify-content: space-between;
+}

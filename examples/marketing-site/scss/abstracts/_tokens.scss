@@ -1,0 +1,56 @@
+// Fjord Labs — brand design tokens (abstracts layer)
+@use 'sass:map';
+
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+) !default;
+
+// Intentional Fjord Labs palette — deep teal + warm amber on stone cream
+$brand: (
+  teal-900: #0a3d3d,
+  teal-800: #0d4f4f,
+  teal-700: #126666,
+  teal-100: #d4ecec,
+  amber-600: #c27803,
+  amber-500: #d97706,
+  amber-400: #f59e0b,
+  stone-50: #faf8f5,
+  stone-100: #f3efe8,
+  stone-800: #2c2825,
+  stone-700: #4a4540,
+  white: #ffffff,
+) !default;
+
+$spacing: (
+  xs: 0.5rem,
+  sm: 1rem,
+  md: 1.5rem,
+  lg: 2.5rem,
+  xl: 4rem,
+  2xl: 6rem,
+) !default;
+
+$font-display: '"Fraunces", Georgia, serif' !default;
+$font-body: '"Outfit", system-ui, sans-serif' !default;
+
+$type-scale: (
+  display: clamp(2.25rem, 5vw + 1rem, 4rem),
+  h1: clamp(1.75rem, 3vw + 1rem, 2.75rem),
+  h2: clamp(1.375rem, 2vw + 0.75rem, 2rem),
+  lead: clamp(1.0625rem, 1vw + 0.875rem, 1.25rem),
+  body: 1rem,
+  small: 0.875rem,
+) !default;
+
+$line-heights: (
+  tight: 1.15,
+  snug: 1.35,
+  normal: 1.5,
+  relaxed: 1.65,
+) !default;
+
+$container-max: 72rem !default;
+$section-padding-y: map.get($spacing, xl) !default;

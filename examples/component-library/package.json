@@ -1,0 +1,11 @@
+{
+  "name": "@scss-examples/component-library",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Modular SCSS component library with documented public API boundaries",
+  "sass": "scss/index.scss",
+  "scripts": {
+    "build": "sass scss/index.scss dist/component-library.css --style=expanded",
+    "build:compressed": "sass scss/index.scss dist/component-library.min.css --style=compressed"
+  }
+}

@@ -1,0 +1,49 @@
+@use 'sass:map';
+@use '../abstracts/tokens' as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.625rem 1.25rem;
+  border: 2px solid transparent;
+  border-radius: 0.25rem;
+  font-family: $font-body;
+  font-size: map.get($type-scale, body);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  &:focus-visible {
+    outline: 2px solid map.get($brand, amber-400);
+    outline-offset: 2px;
+  }
+
+  &--primary {
+    background-color: map.get($brand, amber-500);
+    color: map.get($brand, stone-800);
+
+    &:hover {
+      background-color: map.get($brand, amber-600);
+    }
+  }
+
+  &--ghost {
+    background-color: transparent;
+    border-color: rgb(255 255 255 / 0.35);
+    color: map.get($brand, white);
+
+    &:hover {
+      border-color: map.get($brand, white);
+      background-color: rgb(255 255 255 / 0.08);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}

@@ -1,0 +1,30 @@
+// Modern token module — consumed via @use/@forward
+@use 'sass:map';
+
+$colors: (
+  accent: #0066cc,
+  accent-hover: #0052a3,
+  text: #1a1814,
+  text-muted: #5c574f,
+  surface: #ffffff,
+  surface-muted: #f0eeea,
+  border: #ddd9d0,
+  info-bg: #e8f1fb,
+) !default;
+
+$spacing: (
+  sm: 0.5rem,
+  md: 0.75rem,
+  lg: 1rem,
+  xl: 1.5rem,
+) !default;
+
+$radius-md: 0.375rem !default;
+
+@function color($name) {
+  @return map.get($colors, $name);
+}
+
+@function space($name) {
+  @return map.get($spacing, $name);
+}

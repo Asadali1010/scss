@@ -1,0 +1,22 @@
+@use 'sass:map';
+@use '../abstracts/tokens' as *;
+
+:root {
+  --fjord-teal: #{map.get($brand, teal-800)};
+  --fjord-teal-dark: #{map.get($brand, teal-900)};
+  --fjord-amber: #{map.get($brand, amber-500)};
+  --fjord-surface: #{map.get($brand, stone-50)};
+  --fjord-text: #{map.get($brand, stone-800)};
+  --fjord-text-muted: #{map.get($brand, stone-700)};
+  --fjord-font-display: #{$font-display};
+  --fjord-font-body: #{$font-body};
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

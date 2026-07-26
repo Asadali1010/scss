@@ -1,0 +1,34 @@
+@use 'sass:map';
+@use '../abstracts/tokens' as tokens;
+
+/// Light theme semantic color map.
+$theme-light: (
+  surface: map.get(tokens.$colors, stone-50),
+  surface-raised: map.get(tokens.$colors, white),
+  surface-muted: map.get(tokens.$colors, stone-100),
+  text: map.get(tokens.$colors, stone-900),
+  text-muted: map.get(tokens.$colors, stone-700),
+  border: #ddd9d0,
+  accent: map.get(tokens.$colors, orange-500),
+  accent-hover: map.get(tokens.$colors, orange-600),
+  accent-subtle: #fef3e8,
+) !default;
+
+/// Typography and layout tokens emitted as CSS custom properties.
+$theme-light-tokens: map.merge(
+  $theme-light,
+  (
+    font-display: map.get(tokens.$font-families, display),
+    font-body: map.get(tokens.$font-families, body),
+    font-mono: map.get(tokens.$font-families, mono),
+    grid-gutter: tokens.$grid-gutter,
+    grid-columns: tokens.$grid-columns,
+  )
+) !default;
+
+/// Emit light theme CSS custom properties.
+@mixin emit-theme-vars($prefix: 'color-') {
+  @each $key, $value in $theme-light-tokens {
+    --#{$prefix}#{$key}: #{$value};
+  }
+}

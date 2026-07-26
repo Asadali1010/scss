@@ -1,0 +1,59 @@
+@use 'sass:map';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.app-shell {
+  display: grid;
+  min-height: 100vh;
+  background-color: map.get($colors, slate-100);
+  font-family: $font-sans;
+
+  @include breakpoint-up(lg) {
+    grid-template-columns: $sidebar-width 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'sidebar header'
+      'sidebar main';
+  }
+}
+
+.app-shell__header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: map.get($spacing, md);
+  padding: map.get($spacing, md) map.get($spacing, lg);
+  background-color: map.get($colors, white);
+  border-bottom: 1px solid map.get($colors, slate-200);
+
+  @include breakpoint-up(lg) {
+    padding-inline: map.get($spacing, xl);
+  }
+}
+
+.app-shell__title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: map.get($colors, slate-950);
+}
+
+.app-shell__main {
+  grid-area: main;
+  padding: map.get($spacing, md);
+  overflow-x: auto;
+
+  @include breakpoint-up(md) {
+    padding: map.get($spacing, lg);
+  }
+
+  @include breakpoint-up(lg) {
+    padding: map.get($spacing, xl);
+  }
+}
+
+.app-shell__content-grid {
+  display: grid;
+  gap: map.get($spacing, lg);
+}

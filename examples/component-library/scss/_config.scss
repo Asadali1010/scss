@@ -1,0 +1,28 @@
+// Component library configuration — tunable defaults and shared foundation re-exports.
+@use 'sass:map';
+@use '../../shared/scss/abstracts/tokens' as tokens;
+
+/// BEM block prefix applied to layout utilities (components use semantic block names).
+$layout-prefix: 'l' !default;
+
+/// Default spacing step keys (from shared `$spacing` map) for layout patterns.
+$stack-gap-step: 4 !default;
+$cluster-gap-step: 3 !default;
+
+/// Resolved default gap values for stack/cluster mixins.
+$stack-gap-default: map.get(tokens.$spacing, $stack-gap-step) !default;
+$cluster-gap-default: map.get(tokens.$spacing, $cluster-gap-step) !default;
+
+/// Minimum interactive target size (WCAG touch target guidance).
+$min-touch-target: 2.75rem !default;
+
+/// Border radius scale for components.
+$radius-sm: 0.25rem !default;
+$radius-md: 0.5rem !default;
+$radius-lg: 0.75rem !default;
+
+/// Re-export shared foundation modules for consumer `@use` via the public API.
+@forward '../../shared/scss/abstracts/tokens';
+@forward '../../shared/scss/abstracts/functions';
+@forward '../../shared/scss/tools/breakpoints';
+@forward '../../shared/scss/tools/grid';

@@ -1,0 +1,65 @@
+@use 'sass:map';
+@use '../abstracts/tokens' as tokens;
+
+/// Brand A palette — enterprise partner identity.
+$brand-a: (
+  name: 'brand-a',
+  surface: #f4f7fb,
+  surface-raised: #ffffff,
+  surface-muted: #e8eef6,
+  text: #0f1a2e,
+  text-muted: #4a5568,
+  border: #cbd5e1,
+  accent: #2563eb,
+  accent-hover: #1d4ed8,
+  accent-subtle: #eff6ff,
+) !default;
+
+/// Brand B palette — alternate white-label identity.
+$brand-b: (
+  name: 'brand-b',
+  surface: #faf8f5,
+  surface-raised: #ffffff,
+  surface-muted: #f0ebe3,
+  text: #1c1917,
+  text-muted: #57534e,
+  border: #d6d3d1,
+  accent: #059669,
+  accent-hover: #047857,
+  accent-subtle: #ecfdf5,
+) !default;
+
+/// All registered brand theme maps.
+$brands: (
+  a: $brand-a,
+  b: $brand-b,
+) !default;
+
+/// Emit CSS custom properties for a single brand map.
+@mixin emit-brand-vars($brand-map, $prefix: 'color-') {
+  @each $key, $value in $brand-map {
+    @if $key != name {
+      --#{$prefix}#{$key}: #{$value};
+    }
+  }
+}
+
+/// Generate [data-brand] attribute selectors for all registered brands.
+@mixin emit-brand-themes($prefix: 'color-') {
+  @each $slug, $brand-map in $brands {
+    [data-brand='#{$slug}'] {
+      @include emit-brand-vars($brand-map, $prefix);
+    }
+  }
+}
+
+/// Validate that a brand map defines all required semantic keys.
+@function validate-brand($brand-map) {
+  @each $key in tokens.$semantic-token-keys {
+    @if not map.has-key($brand-map, $key) {
+      @error 'Brand map is missing required token: #{$key}';
+    }
+  }
+
+  @return true;
+}
